@@ -29,22 +29,22 @@ function Auto(label, price) {
 
 function Sedan(label, price, color, wheels) {
 	const sedan = Object.assign(Auto(label, price, wheels), {
-		
-		 color,
+
+		color,
 		type: "sedan",
 		signal: () => console.log("beeeep"),
 	});
-	if(label !== undefined && price !== undefined && color !== undefined){
+	if (label !== undefined && price !== undefined && color !== undefined) {
 		auto.sedan.push(sedan);
 	}
-	
+
 	return sedan;
 }
 
 const sedan1 = Sedan("WV", 12000, "metallic");
 const sedan2 = Sedan("Porsche", 140000, "red");
 const sedan3 = Sedan("Toyota", 15000, "blue")
-console.log(Sedan());
+
 console.log(auto.sedan);
 
 // label
@@ -58,17 +58,17 @@ console.log(auto.sedan);
 
 function Truck(label, price, color) {
 	const truck = Object.assign(Auto(label, price), {
-		
+
 		color,
 		wheels: 8,
-	  type: "truck",
-	  signal: () => console.log("WoooooW"),
-  });
-  if(label !== undefined && price !== undefined && color !== undefined){
-	  auto.truck.push(truck);
-  }
-  
-  return truck;	
+		type: "truck",
+		signal: () => console.log("WoooooW"),
+	});
+	if (label !== undefined && price !== undefined && color !== undefined) {
+		auto.truck.push(truck);
+	}
+
+	return truck;
 }
 const truck1 = Truck("Volvo", 130000, "blue");
 const truck2 = Truck("Man", 160000, "white");
@@ -76,28 +76,28 @@ const truck3 = Truck("KraZ", 300000, "green");
 
 console.log(auto.truck);
 
- 
-	
-	
-	let truckLabel = auto.truck.map(({ label }) => `${label}`)
-	
+
+
+
+let truckLabel = auto.truck.map(({ label }) => `${label}`)
+
 console.log(truckLabel);
 
 
 const sumPriceSedan = auto.sedan.reduce(
 	(accumulator, currentValue) => accumulator + currentValue.price,
 	0
- );
- console.log(sumPriceSedan);
+);
+console.log(sumPriceSedan);
 
- const sumPriceTruck = auto.truck.reduce(
+const sumPriceTruck = auto.truck.reduce(
 	(accumulator, currentValue) => accumulator + currentValue.price,
 	0
- );
- console.log(sumPriceTruck);
+);
+console.log(sumPriceTruck);
 
- const sumPriceAuto = sumPriceSedan + sumPriceTruck;
- console.log(sumPriceAuto);
+const sumPriceAuto = sumPriceSedan + sumPriceTruck;
+console.log(sumPriceAuto);
 
 function sum(truck, sedan) {
 	let sumAuto = sedan.concat(truck)
@@ -108,13 +108,52 @@ allInOne = sum(auto.sedan, auto.truck)
 console.log(allInOne);
 
 let onlySedan = [];
-for(const el of allInOne[i]) {
-	
-	if(el =="sedan"){
-		onlySedan = onlySedan.push(allInOne[i]);
-	}	
+
+for (let i = 0; i < allInOne.length; i++) {
+
+	for (let key in allInOne[i]) {
+		if (allInOne[i][key] == "sedan") {
+			onlySedan.push(allInOne[i]);
+		}
+	}
 }
+
 console.log(onlySedan);
+
+let onlyTruck = [];
+
+for (let i = 0; i < allInOne.length; i++) {
+
+	for (let key in allInOne[i]) {
+		if (allInOne[i][key] == "truck") {
+			onlyTruck.push(allInOne[i]);
+		}
+	}
+}
+
+console.log(onlyTruck);
+
+
+let findItem = allInOne.find((el, idx) => typeof el === "object" && idx === 1);
+console.log(findItem);
+
+
+let findItemByIndex = [];
+
+for (let i = 0; i < allInOne.length; i++) {
+
+	for (let key in allInOne[i]) {
+		if (allInOne[i][key] == "Man") {
+			findItemByIndex.push(allInOne[i - 1]);
+			findItemByIndex.push(allInOne[i + 1]);
+		}
+	}
+}
+
+console.log(findItemByIndex);
+
+
+
 
 // Amount of trucks / sedans => by 3
 
